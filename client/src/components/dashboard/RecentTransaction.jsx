@@ -1,3 +1,5 @@
+import TransactionItem from "./TransactionItem";
+
 function RecentTransactions() {
 
   const transactions = [
@@ -55,49 +57,10 @@ function RecentTransactions() {
       <div>
 
         {transactions.map((transaction) => (
-
-          <div
+         <TransactionItem
             key={transaction.id}
-            className="flex justify-between items-center py-4 border-b last:border-b-0"
-          >
-
-            <div className="flex items-center gap-4">
-
-              <div className="text-3xl">
-                {transaction.icon}
-              </div>
-
-              <div>
-
-                <h3 className="font-semibold">
-                  {transaction.title}
-                </h3>
-
-                <p className="text-gray-500 text-sm">
-                  {transaction.date}
-                </p>
-
-              </div>
-
-            </div>
-
-            <div>
-
-              <span
-                className={`font-bold ${
-                  transaction.type === "income"
-                    ? "text-green-600"
-                    : "text-red-600"
-                }`}
-              >
-                {transaction.type === "income" ? "+" : "-"}₹
-                {transaction.amount}
-              </span>
-
-            </div>
-
-          </div>
-
+            transaction={transaction}
+        />
         ))}
 
       </div>
