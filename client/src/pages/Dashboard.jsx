@@ -1,3 +1,4 @@
+import SummaryCard from "../components/dashboard/SummaryCard"
 
 
 function Dashboard(){
@@ -12,6 +13,27 @@ function Dashboard(){
             <p className="text-gray-500 mt-2">
                 Welcome back! Here's your financial overview.
             </p>
+
+            <div className="grid grid-cols-3 gap-6 mt-6">
+                
+                <SummaryCard
+                    title="Total Balance"
+                    amount = "₹50,000"
+                    color= "text-blue-600"
+                />
+                <SummaryCard
+                    title="Total Balance"
+                    amount = "₹80,000"
+                    color= "text-green-600"
+                />
+                <SummaryCard
+                    title="Total Balance"
+                    amount = "₹30,000"
+                    color= "text-red-600"
+                />
+
+            </div>
+
         </main>
     )
 
