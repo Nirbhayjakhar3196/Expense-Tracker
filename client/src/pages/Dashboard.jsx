@@ -1,5 +1,6 @@
 import RecentTransaction from "../components/dashboard/RecentTransaction"
 import SummaryCard from "../components/dashboard/SummaryCard"
+import Button from "../components/common/Button"
 
 
 function Dashboard(){
@@ -14,6 +15,14 @@ function Dashboard(){
             <p className="text-gray-500 mt-2">
                 Welcome back! Here's your financial overview.
             </p>
+
+            <div className="mt-5">
+
+                <Button>
+                    Add Expense
+                </Button>
+
+            </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
                 
