@@ -1,9 +1,13 @@
 import RecentTransaction from "../components/dashboard/RecentTransaction"
 import SummaryCard from "../components/dashboard/SummaryCard"
 import Button from "../components/common/Button"
+import ExpenseModal from "../components/dashboard/ExpenseModal"
+import { useState } from "react"
 
 
 function Dashboard(){
+
+    const [isModalOpen, setisModalOpen] = useState(false)
 
     return(
 
@@ -18,7 +22,7 @@ function Dashboard(){
 
             <div className="mt-5">
 
-                <Button>
+                <Button onClick={()=> setisModalOpen(true)}>
                     Add Expense
                 </Button>
 
@@ -45,6 +49,14 @@ function Dashboard(){
                 <RecentTransaction/>
 
             </div>
+
+            {
+                isModalOpen && (
+
+                    <ExpenseModal/>
+
+                )
+            }            
 
         </main>
     )
