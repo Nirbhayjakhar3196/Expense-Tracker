@@ -1,33 +1,34 @@
 
 
-function Button ({children , onClick , variant="primary"}){
+function Button({
+  children,
+  onClick,
+  variant = "primary",
+  type = "button",
+}) {
+  const baseStyle =
+    "px-5 py-3 rounded-lg font-semibold transition-all duration-300 cursor-pointer";
 
-    const baseStyle =
-        "px-5 py-3 rounded-lg font-semibold transition-all duration-300 cursor-pointer";
+  const variants = {
+    primary:
+      "bg-green-600 text-white hover:bg-green-700 hover:scale-105 active:scale-95 focus:outline-none focus:ring-4 focus:ring-green-300",
 
-    const variants = {
+    secondary:
+      "bg-gray-200 text-gray-700 hover:bg-gray-300",
 
-        primary:
-            "bg-green-600 text-white hover:bg-green-700 hover:scale-105 active:scale-95 focus:outline-none focus:ring-4 focus:ring-green-300",
+    danger:
+      "bg-red-600 text-white hover:bg-red-700",
+  };
 
-        secondary: "bg-gray-200 text-gray-700 hover:bg-gray-300",
-
-        danger: "bg-red-600 text-white hover:bg-red-700"
-
-    }
-
-    return(
-
-        <button
-            onClick={onClick}
-            className={`${baseStyle} ${variants[variant]}`}
-        >
-            
-            {children}
-
-        </button>
-    )
-    
+  return (
+    <button
+      type={type}
+      onClick={onClick}
+      className={`${baseStyle} ${variants[variant]}`}
+    >
+      {children}
+    </button>
+  );
 }
 
 export default Button;

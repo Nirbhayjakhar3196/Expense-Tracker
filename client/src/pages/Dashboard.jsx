@@ -1,67 +1,86 @@
-import RecentTransaction from "../components/dashboard/RecentTransaction"
-import SummaryCard from "../components/dashboard/SummaryCard"
-import Button from "../components/common/Button"
-import ExpenseModal from "../components/dashboard/ExpenseModal"
-import { useState } from "react"
+import { useState } from "react";
 
+import SummaryCard from "../components/dashboard/SummaryCard";
+import RecentTransaction from "../components/dashboard/RecentTransaction";
+import Button from "../components/common/Button";
+import ExpenseModal from "../components/dashboard/ExpenseModal";
 
-function Dashboard(){
+function Dashboard() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-    const [isModalOpen, setisModalOpen] = useState(false)
+  const [expenses, setExpenses] = useState([
+    {
+      id: 1,
+      title: "Gaming",
+      amount: 1000,
+      category: "Entertainment",
+      date: "2026-07-04",
+      notes: "",
+      type: "expense",
+    },
+  ]);
 
-    return(
+  const handleSaveExpense = (newExpense) => {
+    const expense = {
+      ...newExpense,
+      id: Date.now(),
+      type: "expense",
+    };
 
-        <main className="flex-1 p-6">
-            <h1 className="text-3xl font-bold ">
-                Dashboard
-            </h1>
+    setExpenses((prev) => [expense, ...prev]);
 
-            <p className="text-gray-500 mt-2">
-                Welcome back! Here's your financial overview.
-            </p>
+    setIsModalOpen(false);
 
-            <div className="mt-5">
+    console.log(expense);
+  };
 
-                <Button onClick={()=> setisModalOpen(true)}>
-                    Add Expense
-                </Button>
+  return (
+    <main className="flex-1 p-6">
+      <h1 className="text-3xl font-bold">
+        Dashboard
+      </h1>
 
-            </div>
+      <p className="text-gray-500 mt-2">
+        Welcome back! Here's your financial overview.
+      </p>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
-                
-                <SummaryCard
-                    title="Total Balance"
-                    amount = "₹50,000"
-                    color= "text-blue-600"
-                />
-                <SummaryCard
-                    title="Total Balance"
-                    amount = "₹80,000"
-                    color= "text-green-600"
-                />
-                <SummaryCard
-                    title="Total Balance"
-                    amount = "₹30,000"
-                    color= "text-red-600"
-                />
+      <div className="mt-5">
+        <Button onClick={() => setIsModalOpen(true)}>
+          Add Expense
+        </Button>
+      </div>
 
-                <RecentTransaction/>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
+        <SummaryCard
+          title="Total Balance"
+          amount="₹50,000"
+          color="text-blue-600"
+        />
 
-            </div>
+        <SummaryCard
+          title="Total Income"
+          amount="₹80,000"
+          color="text-green-600"
+        />
 
-            {
-                isModalOpen && (
+        <SummaryCard
+          title="Total Expense"
+          amount="₹30,000"
+          color="text-red-600"
+        />
 
-                    <ExpenseModal/>
+        {/* Next lesson: We'll pass expenses here */}
+        <RecentTransaction />
+      </div>
 
-                )
-            }            
-
-        </main>
-    )
-
+      {isModalOpen && (
+        <ExpenseModal
+          onClose={() => setIsModalOpen(false)}
+          onSave={handleSaveExpense}
+        />
+      )}
+    </main>
+  );
 }
 
-
-export default Dashboard
+export default Dashboard;
