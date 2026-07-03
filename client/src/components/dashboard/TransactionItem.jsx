@@ -1,3 +1,5 @@
+
+
 function TransactionItem({ transaction }) {
   return (
     <div className="flex justify-between items-center py-4 border-b last:border-b-0 hover:bg-gray-100 rounded-lg px-2 cursor-pointer">
@@ -6,7 +8,7 @@ function TransactionItem({ transaction }) {
       <div className="flex items-center gap-4">
 
         <div className="text-3xl">
-          {transaction.icon}
+          {transaction.icon ||"💸" }
         </div>
 
         <div>

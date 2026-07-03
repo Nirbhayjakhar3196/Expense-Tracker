@@ -69,8 +69,7 @@ function Dashboard() {
           color="text-red-600"
         />
 
-        {/* Next lesson: We'll pass expenses here */}
-        <RecentTransaction />
+        <RecentTransaction transactions={expenses} />
       </div>
 
       {isModalOpen && (
