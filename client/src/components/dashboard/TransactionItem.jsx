@@ -1,6 +1,6 @@
 
 
-function TransactionItem({ transaction }) {
+function TransactionItem({ transaction ,onDelete }) {
   return (
     <div className="flex justify-between items-center py-4 border-b last:border-b-0 hover:bg-gray-100 rounded-lg px-2 cursor-pointer">
 
@@ -24,16 +24,27 @@ function TransactionItem({ transaction }) {
       </div>
 
       {/* Right Section */}
-      <span
-        className={`font-bold ${
-          transaction.type === "income"
-            ? "text-green-600"
-            : "text-red-600"
-        }`}
-      >
-        {transaction.type === "income" ? "+" : "-"}₹
-        {transaction.amount}
-      </span>
+      <div className="flex items-center gap-3">
+
+        <span
+          className={`font-bold ${
+            transaction.type === "income"
+              ? "text-green-600"
+              : "text-red-600"
+          }`}
+        >
+          {transaction.type === "income" ? "+" : "-"}₹
+          {transaction.amount}
+        </span>
+
+        <button
+          onClick={() => onDelete(transaction.id)}
+          className="text-red-500 hover:text-red-700"
+        >
+          🗑️
+        </button>
+
+      </div>
 
     </div>
   );

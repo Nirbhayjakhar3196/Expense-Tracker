@@ -1,6 +1,6 @@
 import TransactionItem from "./TransactionItem";
 
-function RecentTransactions({ transactions }) {
+function RecentTransactions({ transactions , onDelete }) {
 
   return (
     <div className="bg-white rounded-xl shadow-md border p-6 mt-8">
@@ -19,6 +19,7 @@ function RecentTransactions({ transactions }) {
             <TransactionItem
               key={transaction.id}
               transaction={transaction}
+              onDelete={onDelete}
             />
           ))}
         </div>

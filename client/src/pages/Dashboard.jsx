@@ -34,6 +34,12 @@ function Dashboard() {
     console.log(expense);
   };
 
+  const handleDeleteExpense = (id) => {
+
+    setExpenses((prev) => prev.filter((expense) => expense.id !== id));
+
+  }
+
   return (
     <main className="flex-1 p-6">
       <h1 className="text-3xl font-bold">
@@ -69,7 +75,7 @@ function Dashboard() {
           color="text-red-600"
         />
 
-        <RecentTransaction transactions={expenses} />
+        <RecentTransaction transactions={expenses} onDelete={handleDeleteExpense} />
       </div>
 
       {isModalOpen && (
