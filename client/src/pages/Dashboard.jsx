@@ -40,6 +40,27 @@ function Dashboard() {
 
   }
 
+  const totalExpense = expenses.reduce((total , expense) => {
+
+    if(expense.type === "expense") {
+      return total + Number(expense.amount);
+    }
+
+    return total;
+
+  }, 0)
+
+  const totalIncome = expenses.reduce((total , expense) => {
+
+    if(expense.type === "income"){
+      return total + Number(expense.amount);
+    }
+
+    return total;
+  },0)
+
+  const totalBalance = totalIncome - totalExpense;
+
   return (
     <main className="flex-1 p-6">
       <h1 className="text-3xl font-bold">
@@ -59,19 +80,19 @@ function Dashboard() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
         <SummaryCard
           title="Total Balance"
-          amount="₹50,000"
+          amount={`₹${totalBalance}`}
           color="text-blue-600"
         />
 
         <SummaryCard
           title="Total Income"
-          amount="₹80,000"
+          amount={`₹${totalIncome}`}
           color="text-green-600"
         />
 
         <SummaryCard
           title="Total Expense"
-          amount="₹30,000"
+          amount={`₹${totalExpense}`}
           color="text-red-600"
         />
 
