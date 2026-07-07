@@ -8,11 +8,40 @@ import ExpenseModal from "../components/dashboard/ExpenseModal";
 function Dashboard() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  const [searchTerm, setSearchTerm] = useState("");
+
   const [expenses, setExpenses] = useState([
     {
       id: 1,
       title: "Gaming",
       amount: 1000,
+      category: "Entertainment",
+      date: "2026-07-04",
+      notes: "",
+      type: "expense",
+    },
+    {
+      id: 1,
+      title: "Shopping",
+      amount: 2000,
+      category: "Shopping",
+      date: "2026-04-04",
+      notes: "",
+      type: "expense",
+    },
+    {
+      id: 1,
+      title: "Medicine",
+      amount: 550,
+      category: "Bills",
+      date: "2025-07-04",
+      notes: "",
+      type: "expense",
+    },
+    {
+      id: 1,
+      title: "Mastiii",
+      amount: 900,
       category: "Entertainment",
       date: "2026-07-04",
       notes: "",
@@ -61,6 +90,10 @@ function Dashboard() {
 
   const totalBalance = totalIncome - totalExpense;
 
+  const filteredExpenses = expenses.filter((expense) => 
+    expense.title.toLowerCase().includes(searchTerm.toLowerCase())
+  )
+
   return (
     <main className="flex-1 p-6">
       <h1 className="text-3xl font-bold">
@@ -75,6 +108,16 @@ function Dashboard() {
         <Button onClick={() => setIsModalOpen(true)}>
           Add Expense
         </Button>
+      </div>
+
+      <div className="mt-6">
+        <input
+          type="text"
+          placeholder="🔍 Search expenses..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className="w-full md:w-96 border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-green-500"
+        />
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
@@ -96,7 +139,7 @@ function Dashboard() {
           color="text-red-600"
         />
 
-        <RecentTransaction transactions={expenses} onDelete={handleDeleteExpense} />
+        <RecentTransaction transactions={filteredExpenses} onDelete={handleDeleteExpense} />
       </div>
 
       {isModalOpen && (
