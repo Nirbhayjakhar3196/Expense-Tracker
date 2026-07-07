@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState , useEffect } from "react";
 
 import SummaryCard from "../components/dashboard/SummaryCard";
 import RecentTransaction from "../components/dashboard/RecentTransaction";
@@ -6,50 +6,29 @@ import Button from "../components/common/Button";
 import ExpenseModal from "../components/dashboard/ExpenseModal";
 
 function Dashboard() {
+
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const [searchTerm, setSearchTerm] = useState("");
 
   const [selectedCategory, setSelectedCategory] = useState("All")
 
-  const [expenses, setExpenses] = useState([
-    {
-      id: 1,
-      title: "Gaming",
-      amount: 1000,
-      category: "Entertainment",
-      date: "2026-07-04",
-      notes: "",
-      type: "expense",
-    },
-    {
-      id: 1,
-      title: "Shopping",
-      amount: 2000,
-      category: "Shopping",
-      date: "2026-04-04",
-      notes: "",
-      type: "expense",
-    },
-    {
-      id: 1,
-      title: "Medicine",
-      amount: 550,
-      category: "Bills",
-      date: "2025-07-04",
-      notes: "",
-      type: "expense",
-    },
-    {
-      id: 1,
-      title: "Mastiii",
-      amount: 900,
-      category: "Entertainment",
-      date: "2026-07-04",
-      notes: "",
-      type: "expense",
-    },
-  ]);
+  const [expenses, setExpenses] = useState([]);
+
+  useEffect(() => {
+
+    const savedExpenses = localStorage.getItem("expenses")
+
+    if(savedExpenses){
+      setExpenses(JSON.parse(savedExpenses))
+    }
+
+  }, [])
+
+  useEffect(() => {
+
+    localStorage.setItem("expenses" , JSON.stringify(expenses))
+  } , [expenses])
 
   const handleSaveExpense = (newExpense) => {
     const expense = {
