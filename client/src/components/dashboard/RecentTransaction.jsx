@@ -10,10 +10,24 @@ function RecentTransactions({ transactions , onDelete }) {
       </h2>
 
       {transactions.length === 0 ? (
-        <p className="text-gray-500 text-center">
-          No transactions yet.
-        </p>
-      ) : (
+
+        <div className="text-center py-12">
+
+            <div className="text-6xl mb-4">
+                📭
+            </div>
+
+            <h3 className="text-xl font-semibold text-gray-700">
+                No Expenses Found
+            </h3>
+
+            <p className="text-gray-500 mt-2">
+                Try changing your search or add a new expense.
+            </p>
+
+        </div>
+
+    ) : (
         <div>
           {transactions.map((transaction) => (
             <TransactionItem
