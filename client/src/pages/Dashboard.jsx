@@ -10,6 +10,8 @@ function Dashboard() {
 
   const [searchTerm, setSearchTerm] = useState("");
 
+  const [selectedCategory, setSelectedCategory] = useState("All")
+
   const [expenses, setExpenses] = useState([
     {
       id: 1,
@@ -90,9 +92,16 @@ function Dashboard() {
 
   const totalBalance = totalIncome - totalExpense;
 
-  const filteredExpenses = expenses.filter((expense) => 
-    expense.title.toLowerCase().includes(searchTerm.toLowerCase())
-  )
+  const filteredExpenses = expenses.filter((expense) => {
+    const matchesSearch =expense.title.toLowerCase().includes(searchTerm.toLowerCase())
+
+    const matchesCateogory = 
+          selectedCategory === "All" ||
+          expense.category === selectedCategory;
+
+    return matchesCateogory && matchesSearch
+
+})
 
   return (
     <main className="flex-1 p-6">
@@ -118,6 +127,22 @@ function Dashboard() {
           onChange={(e) => setSearchTerm(e.target.value)}
           className="w-full md:w-96 border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-green-500"
         />
+
+        <select
+          onChange={selectedCategory}
+          onChange={(e) => setSelectedCategory(e.target.value)}
+          className="ml-3 border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-green-500"
+        >
+
+          <option value="All">All Categories</option>
+          <option value="Food">Food</option>
+          <option value="Shopping">Shopping</option>
+          <option value="Travel">Travel</option>
+          <option value="Bills">Bills</option>
+          <option value="Entertainment">Entertainment</option>
+
+        </select>
+
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
