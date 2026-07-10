@@ -13,22 +13,23 @@ function Dashboard() {
 
   const [selectedCategory, setSelectedCategory] = useState("All")
 
-  const [expenses, setExpenses] = useState([]);
-
-  useEffect(() => {
-
-    const savedExpenses = localStorage.getItem("expenses")
-
-    if(savedExpenses){
-      setExpenses(JSON.parse(savedExpenses))
+  const [expenses, setExpenses] = useState(() => {
+    try {
+      const saved = localStorage.getItem("expenses");
+      return saved ? JSON.parse(saved) : [];
+    } catch (err) {
+      console.error("Failed to read saved expenses:", err);
+      return [];
     }
-
-  }, [])
+  });
 
   useEffect(() => {
-
-    localStorage.setItem("expenses" , JSON.stringify(expenses))
-  } , [expenses])
+    try {
+      localStorage.setItem("expenses", JSON.stringify(expenses));
+    } catch (err) {
+      console.error("Failed to save expenses:", err);
+    }
+  }, [expenses]);
 
   const handleSaveExpense = (newExpense) => {
     const expense = {
@@ -108,7 +109,7 @@ function Dashboard() {
         />
 
         <select
-          onChange={selectedCategory}
+          value={selectedCategory}
           onChange={(e) => setSelectedCategory(e.target.value)}
           className="ml-3 border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-green-500"
         >

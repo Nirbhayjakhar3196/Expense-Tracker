@@ -79,7 +79,7 @@ function ExpenseModal({ onClose, onSave }) {
             <input
               type="number"
               name="amount"
-              placeholder="e.g. 3000"
+              placeholder="Enter amount..."
               value={formData.amount}
               onChange={handleChange}
               className="w-full border rounded-lg px-4 py-3 mb-4 focus:outline-none focus:ring-2 focus:ring-green-500"
