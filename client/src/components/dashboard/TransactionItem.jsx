@@ -29,7 +29,7 @@ function TransactionItem({ transaction ,onDelete }) {
           className={`font-bold ${
             transaction.type === "income"
               ? "text-green-600"
-              : "text-red-600"
+              : "text-red-500"
           }`}
         >
           {transaction.type === "income" ? "+" : "-"}₹
