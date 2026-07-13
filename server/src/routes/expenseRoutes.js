@@ -8,4 +8,6 @@ router.post("/", expenseController.createExpense);
 
 router.get("/" , expenseController.getAllExpenses)
 
+router.delete('/:id' , expenseController.deleteExpense)
+
 module.exports = router;
