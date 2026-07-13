@@ -21,6 +21,27 @@ const createExpense = async(req, res) => {
 
 }
 
+const getAllExpenses = async(req , res) => {
+
+    try {
+
+        const expenses = await expenseService.getAllExpenses();
+
+        res.status(200).json({
+            success:true,
+            count:expenses.length,
+            data:expenses
+        })
+    } catch (error) {
+        res.status(500).json({
+            success:false,
+            message:error.message
+        })
+    }
+
+}
+
 module.exports = {
-    createExpense
+    createExpense,
+    getAllExpenses
 }
