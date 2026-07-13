@@ -10,4 +10,6 @@ router.get("/" , expenseController.getAllExpenses)
 
 router.delete('/:id' , expenseController.deleteExpense)
 
+router.put('/:id' , expenseController.updateExpense)
+
 module.exports = router;

@@ -22,8 +22,23 @@ const deleteExpense = async(id) => {
 
 }
 
+const updateExpense = async(id , expenseData) => {
+
+    const expense = await Expense.findByIdAndUpdate(
+        id,
+        expenseData,
+        {
+            new:true,
+            runValidators:true
+        }
+    )
+
+    return expense
+}
+
 module.exports = {
   createExpense,
   getAllExpenses,
-  deleteExpense
+  deleteExpense,
+  updateExpense
 };

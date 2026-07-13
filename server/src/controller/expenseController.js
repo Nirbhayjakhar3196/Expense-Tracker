@@ -67,8 +67,37 @@ const deleteExpense = async(req, res) => {
 
 }
 
+const updateExpense = async(req , res) => {
+
+    try {
+        const expense = await expenseService.updateExpense(req.params.id , req.body)
+
+        if(!expense){
+            return res.status(404).json({
+                success:false,
+                message:"Expense not found"
+            })
+        }
+
+        res.status(200).json({
+            success:true,
+            message:"Expense Updated Successfully",
+            data:expense
+        })
+
+    } catch (error) {
+        res.status(500).json({
+            success:false,
+            message:error.message
+        })
+    }
+
+
+}
+
 module.exports = {
     createExpense,
     getAllExpenses,
-    deleteExpense
+    deleteExpense,
+    updateExpense
 }
