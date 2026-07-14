@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState , useEffect } from "react";
 import Button from "../common/Button";
 
 function ExpenseModal({ onClose, onSave }) {
@@ -19,6 +19,18 @@ function ExpenseModal({ onClose, onSave }) {
     }));
   };
 
+  useEffect(() => {
+    if (expense) {
+      setFormData({
+        title: expense.title || "",
+        amount: expense.amount || "",
+        category: expense.category || "",
+        date: expense.date ? new Date(expense.date).toISOString().split("T")[0] : "",
+        notes: expense.notes || "",
+      });
+    }
+  }, [expense]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -32,7 +44,7 @@ function ExpenseModal({ onClose, onSave }) {
       return;
     }
 
-    onSave(formData);
+    onSave(formData , expense?.expense._id);
 
     setFormData({
       title: "",

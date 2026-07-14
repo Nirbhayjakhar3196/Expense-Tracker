@@ -1,5 +1,5 @@
 
-function TransactionItem({ transaction ,onDelete }) {
+function TransactionItem({ transaction ,onDelete , onEdit }) {
   return (
     <div className="flex justify-between items-center py-4 border-b last:border-b-0 hover:bg-gray-100 rounded-lg px-2 cursor-pointer">
 
@@ -41,6 +41,10 @@ function TransactionItem({ transaction ,onDelete }) {
           className="text-red-500 hover:text-red-700"
         >
           🗑️
+        </button>
+
+        <button onClick={() => onEdit(transaction)}>
+          ✏️
         </button>
 
       </div>

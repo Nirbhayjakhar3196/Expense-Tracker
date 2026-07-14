@@ -1,6 +1,6 @@
 import { useState , useEffect } from "react";
 
-import { getExpenses , createExpenses , deleteExpenses } from "../services/expenseService";
+import { getExpenses , createExpenses , deleteExpenses ,updateExpense } from "../services/expenseService";
 import SummaryCard from "../components/dashboard/SummaryCard";
 import RecentTransaction from "../components/dashboard/RecentTransaction";
 import Button from "../components/common/Button";
@@ -16,20 +16,8 @@ function Dashboard() {
 
   const [expenses, setExpenses] = useState();
 
-  const handleSaveExpense = (newExpense) => {
-    
-    try {
-      await createExpenses(newExpense)
+  const [editingExpense , setEditingExpense] = useState();
 
-      fetchExpense()
-
-      setIsModalOpen(false);
-      
-    } catch (error) {
-      console.log(error);
-      
-    }
-  };
 
   useEffect(() => {
     fetchExpense()
@@ -46,6 +34,53 @@ function Dashboard() {
       console.log(error);
       
     }
+
+  }
+
+  const handleSaveExpense = async (
+    expenseData,
+    id
+) => {
+
+    try{
+
+        if(id){        
+            await updateExpense(
+                id,
+                expenseData
+            );
+
+        }
+
+        else{
+
+            await createExpense(
+                expenseData
+            );
+
+        }
+
+        fetchExpenses();
+
+        setEditingExpense(null);
+
+        setIsModalOpen(false);
+
+    }
+
+    catch(error){
+
+        console.log(error);
+
+    }
+
+}
+
+  const handleEditExpense = (expense) => {
+
+    setEditingExpense(expense)
+
+    isModalOpen(true)
 
   }
 
@@ -162,8 +197,10 @@ function Dashboard() {
 
       {isModalOpen && (
         <ExpenseModal
-          onClose={() => setIsModalOpen(false)}
+          onClose={() => {setEditingExpense(null) ; setIsModalOpen(false)}}
           onSave={handleSaveExpense}
+
+          expense = {editingExpense}
         />
       )}
     </main>
