@@ -1,6 +1,6 @@
 import { useState , useEffect } from "react";
 
-import { getExpenses , createExpenses , deleteExpenses ,updateExpense } from "../services/expenseService";
+import { getExpenses , createExpenses , deleteExpenses ,updateExpenses } from "../services/expenseService";
 import SummaryCard from "../components/dashboard/SummaryCard";
 import RecentTransaction from "../components/dashboard/RecentTransaction";
 import Button from "../components/common/Button";
@@ -45,7 +45,7 @@ function Dashboard() {
     try{
 
         if(id){        
-            await updateExpense(
+          await updateExpenses(
                 id,
                 expenseData
             );
@@ -142,7 +142,7 @@ function Dashboard() {
       </p>
 
       <div className="mt-5">
-        <Button onClick={() => setIsModalOpen(true)}>
+        <Button onClick={() => { setEditingExpense(null); setIsModalOpen(true); }}>
           Add Expense
         </Button>
       </div>
@@ -192,7 +192,11 @@ function Dashboard() {
           color="text-red-600"
         />
 
-        <RecentTransaction transactions={filteredExpenses} onDelete={handleDeleteExpense} onEdit={handleEditExpense} />
+        <RecentTransaction
+          transactions={filteredExpenses}
+          onDelete={handleDeleteExpense}
+          onEdit={handleEditExpense}
+        />
       </div>
 
       {isModalOpen && (

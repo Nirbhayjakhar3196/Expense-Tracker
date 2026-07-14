@@ -29,9 +29,9 @@ function RecentTransactions({ transactions , onDelete , onEdit }) {
 
     ) : (
         <div>
-          {transactions.map((transaction) => (
+            {transactions.map((transaction) => (
             <TransactionItem
-              key={transaction.id}
+                key={transaction._id}
               transaction={transaction}
               onDelete={onDelete}
               onEdit={onEdit}

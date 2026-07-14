@@ -1,32 +1,32 @@
-import API from './expenseApi'
+import API from "./expenseApi";
 
-export const getExpenses = async() => {
+export const getExpenses = async () => {
+  const response = await API.get("/");
 
-    const response = await API.get('/expenses');
+  return response.data.data;
+};
 
-    return response.data.data
-}
-
-export const createExpenses = async(expenseData) => {
-
-    const response = await API.post(
-        '/expenses',
-        expenseData
-    )
-
-    return response.data.data
-}
-
-export const deleteExpenses = async(id) => {
-
-    const response = await API.delete(`/expenses/${id}`)
-}
-
-export const updateExpense = async (id, expenseData) => {
-  const response = await API.put(
-    `/expenses/${id}`,
+export const createExpenses = async (expenseData) => {
+  const response = await API.post(
+    "/",
     expenseData
   );
 
-  return response.data.data;    
+  return response.data.data;
+};
+
+export const deleteExpenses = async (id) => {
+  await API.delete(`/${id}`);
+};
+
+export const updateExpenses = async (
+  id,
+  expenseData
+) => {
+  const response = await API.put(
+    `/${id}`,
+    expenseData
+  );
+
+  return response.data.data;
 };

@@ -37,7 +37,7 @@ function TransactionItem({ transaction ,onDelete , onEdit }) {
         </span>
 
         <button
-          onClick={() => onDelete(transaction.id)}
+          onClick={() => onDelete(transaction._id)}
           className="text-red-500 hover:text-red-700"
         >
           🗑️
