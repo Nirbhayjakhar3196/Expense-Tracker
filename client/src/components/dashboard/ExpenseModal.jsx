@@ -1,7 +1,7 @@
 import { useState , useEffect } from "react";
 import Button from "../common/Button";
 
-function ExpenseModal({ onClose, onSave }) {
+function ExpenseModal({ onClose, onSave , expense }) {
   const [formData, setFormData] = useState({
     title: "",
     amount: "",
@@ -44,7 +44,7 @@ function ExpenseModal({ onClose, onSave }) {
       return;
     }
 
-    onSave(formData , expense?.expense._id);
+    onSave(formData , expense?._id);
 
     setFormData({
       title: "",

@@ -14,19 +14,19 @@ function Dashboard() {
 
   const [selectedCategory, setSelectedCategory] = useState("All")
 
-  const [expenses, setExpenses] = useState();
+  const [expenses, setExpenses] = useState([]);
 
   const [editingExpense , setEditingExpense] = useState();
 
 
   useEffect(() => {
-    fetchExpense()
+    fetchExpenses()
   },[])
 
-  const fetchExpense = async() => {
+  const fetchExpenses = async() => {
 
     try {
-      const data = await getExpenses
+      const data = await getExpenses()
 
       setExpenses(data)
       
@@ -54,7 +54,7 @@ function Dashboard() {
 
         else{
 
-            await createExpense(
+            await createExpenses(
                 expenseData
             );
 
@@ -80,17 +80,17 @@ function Dashboard() {
 
     setEditingExpense(expense)
 
-    isModalOpen(true)
+    setIsModalOpen(true)
 
   }
 
-  const handleDeleteExpense = (id) => {
+  const handleDeleteExpense = async (id) => {
 
     try {
 
       await deleteExpenses(id)
 
-      fetchExpense()
+      fetchExpenses()
       
     } catch (error) {
       console.log(error);
@@ -192,7 +192,7 @@ function Dashboard() {
           color="text-red-600"
         />
 
-        <RecentTransaction transactions={filteredExpenses} onDelete={handleDeleteExpense} />
+        <RecentTransaction transactions={filteredExpenses} onDelete={handleDeleteExpense} onEdit={handleEditExpense} />
       </div>
 
       {isModalOpen && (
