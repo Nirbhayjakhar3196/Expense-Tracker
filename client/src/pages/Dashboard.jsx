@@ -1,5 +1,6 @@
 import { useState , useEffect } from "react";
 
+import { getExpenses , createExpenses , deleteExpenses } from "../services/expenseService";
 import SummaryCard from "../components/dashboard/SummaryCard";
 import RecentTransaction from "../components/dashboard/RecentTransaction";
 import Button from "../components/common/Button";
@@ -13,41 +14,53 @@ function Dashboard() {
 
   const [selectedCategory, setSelectedCategory] = useState("All")
 
-  const [expenses, setExpenses] = useState(() => {
-    try {
-      const saved = localStorage.getItem("expenses");
-      return saved ? JSON.parse(saved) : [];
-    } catch (err) {
-      console.error("Failed to read saved expenses:", err);
-      return [];
-    }
-  });
-
-  useEffect(() => {
-    try {
-      localStorage.setItem("expenses", JSON.stringify(expenses));
-    } catch (err) {
-      console.error("Failed to save expenses:", err);
-    }
-  }, [expenses]);
+  const [expenses, setExpenses] = useState();
 
   const handleSaveExpense = (newExpense) => {
-    const expense = {
-      ...newExpense,
-      id: Date.now(),
-      type: "expense",
-    };
+    
+    try {
+      await createExpenses(newExpense)
 
-    setExpenses((prev) => [expense, ...prev]);
+      fetchExpense()
 
-    setIsModalOpen(false);
-
-    console.log(expense);
+      setIsModalOpen(false);
+      
+    } catch (error) {
+      console.log(error);
+      
+    }
   };
+
+  useEffect(() => {
+    fetchExpense()
+  },[])
+
+  const fetchExpense = async() => {
+
+    try {
+      const data = await getExpenses
+
+      setExpenses(data)
+      
+    } catch (error) {
+      console.log(error);
+      
+    }
+
+  }
 
   const handleDeleteExpense = (id) => {
 
-    setExpenses((prev) => prev.filter((expense) => expense.id !== id));
+    try {
+
+      await deleteExpenses(id)
+
+      fetchExpense()
+      
+    } catch (error) {
+      console.log(error);
+      
+    }
 
   }
 
