@@ -4,6 +4,15 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 
 ChartJS.register(ArcElement , Tooltip , Legend);
 
+const COLORS =[
+    "#22c55e", // Green
+    "#3b82f6", // Blue
+    "#f59e0b", // Orange
+    "#ef4444", // Red
+    "#8b5cf6", // Purple
+    "#06b6d4", // Cyan
+]
+
 function ExpenseCategoryChart({ expenses }) {
 
     const categories = {};
