@@ -1,26 +1,27 @@
-import Dashboard from "../../pages/Dashboard"
-import Navbar from "./Navbar"
-import Sidebar from "./Sidebar"
+import Navbar from "./Navbar";
+import Sidebar from "./Sidebar";
+import { Outlet } from "react-router-dom";
 
+function MainLayout() {
 
-function MainLayout(){
+  return (
 
-    return(
+    <div className="min-h-screen bg-gray-100">
 
-        <div className="min-h-screen bg-gray-100">
-            <Navbar/>
+      <Navbar />
 
-            <div className="flex">
-                <Sidebar/>
+      <div className="flex">
 
-                <Dashboard/>
+        <Sidebar />
 
-            </div>
+        <Outlet />
 
-        </div>
+      </div>
 
-    )
+    </div>
+
+  );
 
 }
 
-export default MainLayout
+export default MainLayout;

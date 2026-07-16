@@ -1,4 +1,4 @@
-import { Bar } from "react-chartjs-2";
+import {Bar} from 'react-chartjs-2';
 
 import {
   Chart as ChartJS,
@@ -7,7 +7,8 @@ import {
   BarElement,
   Tooltip,
   Legend,
-} from "chart.js";
+}
+from 'chart.js';
 
 ChartJS.register(
   CategoryScale,
@@ -17,34 +18,33 @@ ChartJS.register(
   Legend
 );
 
-function MonthlyExpenseChart({ expenses }) {
+function MonthlyExpenseChart({expenses}) {
 
-  const monthlyExpenses = {};
+  const monthlyExpenses = {}
 
   expenses.forEach((expense) => {
 
-    const month = new Date(expense.date).toLocaleString("default", {
-      month: "short",
-    });
+    const month = new Date(expense.date).toLocaleString('default', { month: 'long' });
 
-    monthlyExpenses[month] =
-      (monthlyExpenses[month] || 0) +
-      Number(expense.amount);
+    if (!monthlyExpenses[month]) {
+      monthlyExpenses[month] = 0;
+    }
+    monthlyExpenses[month] += expense.amount;
 
   });
 
   const data = {
-    labels: Object.keys(monthlyExpenses),
+    labels : Object.keys(monthlyExpenses),
 
-    datasets: [
+    datasets : [
       {
-        label: "Monthly Expenses",
-        data: Object.values(monthlyExpenses),
-      },
-    ],
+        label : "Expenses",
+        data : Object.values(monthlyExpenses),
+      }
+    ]
   };
 
-  return (
+   return (
     <div className="bg-white rounded-xl shadow border p-6">
 
       <h2 className="text-xl font-bold mb-5">
@@ -55,6 +55,7 @@ function MonthlyExpenseChart({ expenses }) {
 
     </div>
   );
+
 }
 
 export default MonthlyExpenseChart;
