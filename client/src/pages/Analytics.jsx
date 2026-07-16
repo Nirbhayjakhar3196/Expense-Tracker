@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import ExpenseCategoryChart from "../components/analytics/ExpenseCategoryChart";
 import MonthlyExpenseChart from "../components/analytics/MonthlyExpenseChart";
 import { getExpenses } from "../services/expenseService";
+import IncomeExpenseChart from "../components/analytics/IncomeExpenseChart";
+import ExpenseDistributionChart from "../components/analytics/ExpenseDistributionChart";
 
 function Analytics() {
 
@@ -60,6 +62,14 @@ function Analytics() {
 
           <MonthlyExpenseChart
               expenses={expenses}
+          />
+
+          <IncomeExpenseChart
+            expenses={expenses}
+          />
+
+          <ExpenseDistributionChart
+            expenses={expenses}
           />
 
       </div>
