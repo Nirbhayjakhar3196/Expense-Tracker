@@ -60,10 +60,20 @@ function IncomeExpenseChart({ expenses }) {
         Income vs Expense
       </h2>
 
-      <Doughnut
-        data={data}
-        options={options}
-      />
+            <div className="h-72 flex justify-center items-center">
+          <Doughnut
+              data={data}
+              options={{
+                  responsive: true,
+                  maintainAspectRatio: false,
+                  plugins: {
+                      legend: {
+                          position: "top",
+                      },
+                  },
+              }}
+          />
+      </div>
 
     </div>
   );

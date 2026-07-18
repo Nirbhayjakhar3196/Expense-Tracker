@@ -51,7 +51,20 @@ function MonthlyExpenseChart({expenses}) {
         Monthly Expenses
       </h2>
 
-      <Bar data={data} />
+      <div className="h-72">
+          <Bar
+              data={data}
+              options={{
+                  responsive: true,
+                  maintainAspectRatio: false,
+                  plugins: {
+                      legend: {
+                          position: "top",
+                      },
+                  },
+              }}
+          />
+      </div>
 
     </div>
   );

@@ -38,7 +38,20 @@ function ExpenseCategoryChart({ expenses }) {
                 Expense By Category
             </h2>
 
-            <Pie data={data} />
+            <div className="h-72 flex justify-center items-center">
+            <Pie
+                data={data}
+                options={{
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: "top",
+                        },
+                    },
+                }}
+            />
+        </div>
         </div>
     );
 }

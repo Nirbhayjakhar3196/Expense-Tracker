@@ -66,10 +66,21 @@ function ExpenseDistributionChart({ expenses }) {
         Top Spending Categories
       </h2>
 
-      <Bar
-        data={data}
-        options={options}
-      />
+      <div className="h-72">
+        <Bar
+            data={data}
+            options={{
+                indexAxis: "y",
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false,
+                    },
+                },
+            }}
+        />
+    </div>
 
     </div>
 
